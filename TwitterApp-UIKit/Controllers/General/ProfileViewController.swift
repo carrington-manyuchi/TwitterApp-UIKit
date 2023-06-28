@@ -15,21 +15,27 @@ class ProfileViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
         navigationItem.title = "Profile"
         view.addSubview(profileTableView)
+        
+        let headerview = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0, width: profileTableView.frame.width, height: 380))
+        
         profileTableView.delegate = self
         profileTableView.dataSource = self
+        profileTableView.tableHeaderView = headerview
+        
         
         configureConstraints()
         
     }
     
     private func configureConstraints() {
+        
         let profileTableViewConstraints = [
             profileTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             profileTableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -37,16 +43,12 @@ class ProfileViewController: UIViewController {
             profileTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         
-        
         NSLayoutConstraint.activate(profileTableViewConstraints)
     }
-
-
 }
 
 
-
-
+//MARK: - TableView Delegates
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
