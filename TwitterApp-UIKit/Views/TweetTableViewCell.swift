@@ -67,15 +67,16 @@ class TweetTableViewCell: UITableViewCell {
     private let replyButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "bubble.left"), for: .normal)
-        button.tintColor = .systemGray2
+        button.setImage(UIImage(named: "reply"), for: .normal)
+        button.tintColor = .black
+        
         return button
     }()
     
     private let retweetButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "arrow.2.squarepath"), for: .normal)
+        button.setImage(UIImage(named: "retweet"), for: .normal)
         button.tintColor = .systemGray2
         return button
     }()
@@ -83,7 +84,7 @@ class TweetTableViewCell: UITableViewCell {
     private let likeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.setImage(UIImage(named: "like"), for: .normal)
         button.tintColor = .systemGray2
         return button
     }()
@@ -91,7 +92,7 @@ class TweetTableViewCell: UITableViewCell {
     private let shareButton: UIButton = {
         let button  = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+        button.setImage(UIImage(named: "share"), for: .normal)
         button.tintColor = .systemGray2
         return button
     }()
