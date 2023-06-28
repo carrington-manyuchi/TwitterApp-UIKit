@@ -7,14 +7,23 @@
 
 import UIKit
 
+// delegate protocol is cappable of delievering actions based on four methods over here
+protocol TweetTableViewCellDelegate: AnyObject {
+    func tweetTableViewCellDidTapReply()
+    func tweetTableViewCellDidTapRetweet()
+    func tweetTableViewCellDidTapLike()
+    func tweetTableViewCellDidTapShare()
+}
+
 class TweetTableViewCell: UITableViewCell {
     
     static let identifier = "TweetTableViewCell"
     
+    weak var delegate: TweetTableViewCellDelegate?
+    
     private let actionSpacing: CGFloat = 30
     
     private let avatarImageView: UIImageView = {
-        
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
@@ -102,6 +111,30 @@ class TweetTableViewCell: UITableViewCell {
         contentView.addSubview(shareButton)
         
         configureConstraints()
+        configureButtons()
+    }
+    
+    @objc private func didTapReply() {
+        delegate?.tweetTableViewCellDidTapReply()
+    }
+    
+    @objc private func didTapRetweet() {
+        delegate?.tweetTableViewCellDidTapRetweet()
+    }
+    
+    @objc private func didTapLike() {
+        delegate?.tweetTableViewCellDidTapLike()
+    }
+    
+    @objc private func didTapShare() {
+        delegate?.tweetTableViewCellDidTapShare()
+    }
+    
+    private func configureButtons() {
+        replyButton.addTarget(self, action: #selector(didTapReply), for: .touchUpInside)
+        retweetButton.addTarget(self, action: #selector(didTapRetweet), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(didTapLike), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(didTapShare), for: .touchUpInside)
     }
     
     
