@@ -8,22 +8,43 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    // This is called anonymous closure function
+    private let timelineTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(TweetTableViewCell.self, forCellReuseIdentifier: TweetTableViewCell.identifier)
+        return tableView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(timelineTableView)
+        timelineTableView.delegate = self
+        timelineTableView.dataSource = self
+    }
 
-        // Do any additional setup after loading the view.
+    // setting the frame for the tableView
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        timelineTableView.frame = view.frame
+    }
+
+}
+
+
+// MARK: - Tableview Methods
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier, for: indexPath) as? TweetTableViewCell  else { return UITableViewCell() }
+        
+        return cell
     }
-    */
-
+    
 }
