@@ -31,6 +31,7 @@
 		8C7564CE2A4DE61200EE7F90 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 8C7564CD2A4DE61200EE7F90 /* FirebaseStorageCombine-Community */; };
 		8C7564D12A4DE89500EE7F90 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564D02A4DE89500EE7F90 /* OnboardingViewController.swift */; };
 		8C7564D32A4DF4D800EE7F90 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564D22A4DF4D800EE7F90 /* RegisterViewController.swift */; };
+		8C7564D62A4E068300EE7F90 /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564D52A4E068300EE7F90 /* RegisterViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		8C7564BA2A4DE34000EE7F90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C7564D02A4DE89500EE7F90 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8C7564D22A4DF4D800EE7F90 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		8C7564D52A4E068300EE7F90 /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 		8C7564932A4C13F200EE7F90 /* TwitterApp-UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				8C7564D42A4E065C00EE7F90 /* ViewModels */,
 				8C7564B22A4C1FE400EE7F90 /* Views */,
 				8C7564A82A4C15B400EE7F90 /* Controllers */,
 				8C7564942A4C13F200EE7F90 /* AppDelegate.swift */,
@@ -150,6 +153,14 @@
 				8C7564D22A4DF4D800EE7F90 /* RegisterViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		8C7564D42A4E065C00EE7F90 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8C7564D52A4E068300EE7F90 /* RegisterViewViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,6 +260,7 @@
 				8C7564B92A4C651C00EE7F90 /* ProfileTableViewHeader.swift in Sources */,
 				8C7564D12A4DE89500EE7F90 /* OnboardingViewController.swift in Sources */,
 				8C7564B42A4C200C00EE7F90 /* TweetTableViewCell.swift in Sources */,
+				8C7564D62A4E068300EE7F90 /* RegisterViewViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
