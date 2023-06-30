@@ -69,14 +69,26 @@ class RegisterViewController: UIViewController {
     private func bindViews() {
         emailTextField.addTarget(self, action: #selector(didChangeEmailField), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(didChangePasswordField), for: .editingChanged)
+        
         viewModel.$isRegistrationFormValid.sink { [weak self] validationState in
             self?.registerButton.isEnabled = validationState
+        }
+        .store(in: &subscriptions)
+        
+        viewModel.$user.sink { [weak self] user in
+            guard user != nil else { return }
+            guard let vc = self?.navigationController?.viewControllers.first as? OnboardingViewController else { return }
+            vc.dismiss(animated: true)
         }
         .store(in: &subscriptions)
     }
     
     @objc private func didTapToDismiss() {
         view.endEditing(true)
+    }
+    
+    @objc private func didTapRegister() {
+        viewModel.createUser()
     }
     
     override func viewDidLoad() {
@@ -86,6 +98,7 @@ class RegisterViewController: UIViewController {
         view.addSubview(passwordTextField)
         view.addSubview(registerButton)
         view.backgroundColor = .systemBackground
+        registerButton.addTarget(self, action: #selector(didTapRegister), for: .touchUpInside)
         configureCOnstraints()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
         bindViews()
