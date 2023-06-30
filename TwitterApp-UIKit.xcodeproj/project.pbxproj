@@ -33,6 +33,12 @@
 		8C7564D32A4DF4D800EE7F90 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564D22A4DF4D800EE7F90 /* RegisterViewController.swift */; };
 		8C7564D62A4E068300EE7F90 /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564D52A4E068300EE7F90 /* RegisterViewViewModel.swift */; };
 		8C7564D92A4EB43600EE7F90 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564D82A4EB43600EE7F90 /* AuthManager.swift */; };
+		8C7564DB2A4F022100EE7F90 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564DA2A4F022100EE7F90 /* LoginViewController.swift */; };
+		8C7564DD2A4F073200EE7F90 /* LoginViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564DC2A4F073200EE7F90 /* LoginViewViewModel.swift */; };
+		8C7564DF2A4F07C000EE7F90 /* AuthenticationViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564DE2A4F07C000EE7F90 /* AuthenticationViewViewModel.swift */; };
+		8C7564E22A4F3A0C00EE7F90 /* TwitterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564E12A4F3A0C00EE7F90 /* TwitterUser.swift */; };
+		8C7564E42A4F3EE900EE7F90 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564E32A4F3EE900EE7F90 /* DatabaseManager.swift */; };
+		8C7564E62A4F44C000EE7F90 /* HomeViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564E52A4F44C000EE7F90 /* HomeViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +61,12 @@
 		8C7564D22A4DF4D800EE7F90 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8C7564D52A4E068300EE7F90 /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
 		8C7564D82A4EB43600EE7F90 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		8C7564DA2A4F022100EE7F90 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8C7564DC2A4F073200EE7F90 /* LoginViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewViewModel.swift; sourceTree = "<group>"; };
+		8C7564DE2A4F07C000EE7F90 /* AuthenticationViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewViewModel.swift; sourceTree = "<group>"; };
+		8C7564E12A4F3A0C00EE7F90 /* TwitterUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterUser.swift; sourceTree = "<group>"; };
+		8C7564E32A4F3EE900EE7F90 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		8C7564E52A4F44C000EE7F90 /* HomeViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +108,7 @@
 		8C7564932A4C13F200EE7F90 /* TwitterApp-UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				8C7564E02A4F39D500EE7F90 /* Models */,
 				8C7564D72A4EB41300EE7F90 /* Networking */,
 				8C7564D42A4E065C00EE7F90 /* ViewModels */,
 				8C7564B22A4C1FE400EE7F90 /* Views */,
@@ -154,6 +167,7 @@
 			children = (
 				8C7564D02A4DE89500EE7F90 /* OnboardingViewController.swift */,
 				8C7564D22A4DF4D800EE7F90 /* RegisterViewController.swift */,
+				8C7564DA2A4F022100EE7F90 /* LoginViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -162,6 +176,9 @@
 			isa = PBXGroup;
 			children = (
 				8C7564D52A4E068300EE7F90 /* RegisterViewViewModel.swift */,
+				8C7564DC2A4F073200EE7F90 /* LoginViewViewModel.swift */,
+				8C7564DE2A4F07C000EE7F90 /* AuthenticationViewViewModel.swift */,
+				8C7564E52A4F44C000EE7F90 /* HomeViewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -170,8 +187,17 @@
 			isa = PBXGroup;
 			children = (
 				8C7564D82A4EB43600EE7F90 /* AuthManager.swift */,
+				8C7564E32A4F3EE900EE7F90 /* DatabaseManager.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		8C7564E02A4F39D500EE7F90 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8C7564E12A4F3A0C00EE7F90 /* TwitterUser.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,13 +288,19 @@
 				8C7564AD2A4C160500EE7F90 /* SearchViewController.swift in Sources */,
 				8C7564D92A4EB43600EE7F90 /* AuthManager.swift in Sources */,
 				8C7564992A4C13F200EE7F90 /* MainTabBarViewController.swift in Sources */,
+				8C7564DD2A4F073200EE7F90 /* LoginViewViewModel.swift in Sources */,
+				8C7564DB2A4F022100EE7F90 /* LoginViewController.swift in Sources */,
 				8C7564952A4C13F200EE7F90 /* AppDelegate.swift in Sources */,
 				8C7564D32A4DF4D800EE7F90 /* RegisterViewController.swift in Sources */,
 				8C7564AF2A4C161200EE7F90 /* NotificationsViewController.swift in Sources */,
+				8C7564E22A4F3A0C00EE7F90 /* TwitterUser.swift in Sources */,
 				8C7564972A4C13F200EE7F90 /* SceneDelegate.swift in Sources */,
+				8C7564E62A4F44C000EE7F90 /* HomeViewViewModel.swift in Sources */,
 				8C7564AB2A4C15F900EE7F90 /* HomeViewController.swift in Sources */,
+				8C7564DF2A4F07C000EE7F90 /* AuthenticationViewViewModel.swift in Sources */,
 				8C7564B72A4C52D500EE7F90 /* ProfileViewController.swift in Sources */,
 				8C7564B12A4C162000EE7F90 /* DirectMessagesViewController.swift in Sources */,
+				8C7564E42A4F3EE900EE7F90 /* DatabaseManager.swift in Sources */,
 				8C7564B92A4C651C00EE7F90 /* ProfileTableViewHeader.swift in Sources */,
 				8C7564D12A4DE89500EE7F90 /* OnboardingViewController.swift in Sources */,
 				8C7564B42A4C200C00EE7F90 /* TweetTableViewCell.swift in Sources */,

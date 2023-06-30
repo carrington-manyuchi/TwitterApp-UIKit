@@ -1,23 +1,23 @@
 //
-//  RegisterViewController.swift
+//  LoginViewController.swift
 //  TwitterApp-UIKit
 //
-//  Created by DA MAC M1 157 on 2023/06/29.
+//  Created by DA MAC M1 157 on 2023/06/30.
 //
 
 import UIKit
 import Combine
 
-class RegisterViewController: UIViewController {
+class LoginViewController: UIViewController {
     
-    private var viewModel = RegisterViewViewModel()
+    private var viewModel = LoginViewViewModel()
     private var subscriptions: Set<AnyCancellable> = []
     
-    private let registerTitleLabel: UILabel = {
+    private let loginTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 32, weight: .bold)
-        label.text = "Create our account"
+        label.text = "Login to your account"
         return label
     }()
     
@@ -43,10 +43,10 @@ class RegisterViewController: UIViewController {
         return textField
     }()
     
-    private let registerButton: UIButton = {
+    private let loginButton: UIButton = {
        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Create Your Account", for: .normal)
+        button.setTitle("Login", for: .normal)
         button.tintColor = .white
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
         button.backgroundColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1)
@@ -58,20 +58,20 @@ class RegisterViewController: UIViewController {
     
     @objc private func didChangeEmailField() {
         viewModel.email = emailTextField.text
-        viewModel.validateRegistrationForm()
+        viewModel.validateLoginForm()
     }
     
     @objc private func didChangePasswordField() {
         viewModel.password = passwordTextField.text
-        viewModel.validateRegistrationForm()
+        viewModel.validateLoginForm()
     }
     
     private func bindViews() {
         emailTextField.addTarget(self, action: #selector(didChangeEmailField), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(didChangePasswordField), for: .editingChanged)
         
-        viewModel.$isRegistrationFormValid.sink { [weak self] validationState in
-            self?.registerButton.isEnabled = validationState
+        viewModel.$isLoginFormValid.sink { [weak self] validationState in
+            self?.loginButton.isEnabled = validationState
         }
         .store(in: &subscriptions)
         
@@ -97,38 +97,41 @@ class RegisterViewController: UIViewController {
         alert.addAction(okayButton)
         present(alert, animated: true)
     }
+        
     
     @objc private func didTapToDismiss() {
         view.endEditing(true)
     }
-    
-    @objc private func didTapRegister() {
-        viewModel.createUser()
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(registerTitleLabel)
+        view.backgroundColor = .systemBackground
+        view.addSubview(loginTitleLabel)
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
-        view.addSubview(registerButton)
-        view.backgroundColor = .systemBackground
-        registerButton.addTarget(self, action: #selector(didTapRegister), for: .touchUpInside)
-        configureCOnstraints()
+        view.addSubview(loginButton)
+        loginButton.addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
-        bindViews()
+        configureConstraints()
+        bindViews() 
     }
     
-    private func configureCOnstraints() {
+    
+    @objc private func didTapLogin() {
+        viewModel.loginUser()
+    }
+    
+    
+    private func configureConstraints() {
 
-        let registerTitleLabelConstraints = [
-            registerTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            registerTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
+        let LoginTitleLabelConstraints = [
+            loginTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loginTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
         ]
         
         let emailTextFieldConstraints = [
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            emailTextField.topAnchor.constraint(equalTo: registerTitleLabel.bottomAnchor, constant: 20),
+            emailTextField.topAnchor.constraint(equalTo: loginTitleLabel.bottomAnchor, constant: 20),
             emailTextField.widthAnchor.constraint(equalToConstant: view.frame.width - 40),
             emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emailTextField.heightAnchor.constraint(equalToConstant: 60)
@@ -142,17 +145,20 @@ class RegisterViewController: UIViewController {
             passwordTextField.heightAnchor.constraint(equalToConstant: 60)
         ]
         
-        let registerButtonConstraints = [
-            registerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            registerButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
-            registerButton.widthAnchor.constraint(equalToConstant: 180),
-            registerButton.heightAnchor.constraint(equalToConstant: 50)
+        let loginButtonConstraints = [
+            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
+            loginButton.widthAnchor.constraint(equalToConstant: 180),
+            loginButton.heightAnchor.constraint(equalToConstant: 50)
         ]
         
-        NSLayoutConstraint.activate(registerTitleLabelConstraints)
+        NSLayoutConstraint.activate(LoginTitleLabelConstraints)
         NSLayoutConstraint.activate(emailTextFieldConstraints)
         NSLayoutConstraint.activate(passwordTextFieldConstraints)
-        NSLayoutConstraint.activate(registerButtonConstraints)
+        NSLayoutConstraint.activate(loginButtonConstraints)
     }
 
+
+
 }
+

@@ -23,6 +23,7 @@ final class RegisterViewViewModel: ObservableObject {
     @Published var password: String?
     @Published var isRegistrationFormValid: Bool = false
     @Published var user: User?
+    @Published var error: String?
     
     private var subscriptions: Set<AnyCancellable> = []
     
@@ -44,19 +45,39 @@ final class RegisterViewViewModel: ObservableObject {
     }
     
     func createUser() {
+        
         guard let email = email,
               let password = password else {
             return
         }
-                
         AuthManager.shared.registerUser(with: email, password: password)
-            .sink { _ in
-                
-            } receiveValue: { [weak self] user in
+            .handleEvents(receiveOutput: { [weak self] user in
                 self?.user = user
+            })
+            .sink { [weak self] completion in
+                
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: { [weak self] user in
+                self?.createRecord(for: user)
+            }
+            .store(in: &subscriptions)
+    }
+    
+    func createRecord(for user: User) {
+        DatabaseManager.shared.collectionUsers(add: user)
+            .sink { [weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: { state in
+                print("Adding user record to database")
             }
             .store(in: &subscriptions)
 
+        
     }
+    
     
 }
