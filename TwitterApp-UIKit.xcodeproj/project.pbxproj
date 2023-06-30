@@ -32,6 +32,7 @@
 		8C7564D12A4DE89500EE7F90 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564D02A4DE89500EE7F90 /* OnboardingViewController.swift */; };
 		8C7564D32A4DF4D800EE7F90 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564D22A4DF4D800EE7F90 /* RegisterViewController.swift */; };
 		8C7564D62A4E068300EE7F90 /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564D52A4E068300EE7F90 /* RegisterViewViewModel.swift */; };
+		8C7564D92A4EB43600EE7F90 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564D82A4EB43600EE7F90 /* AuthManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		8C7564D02A4DE89500EE7F90 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8C7564D22A4DF4D800EE7F90 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8C7564D52A4E068300EE7F90 /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
+		8C7564D82A4EB43600EE7F90 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		8C7564932A4C13F200EE7F90 /* TwitterApp-UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				8C7564D72A4EB41300EE7F90 /* Networking */,
 				8C7564D42A4E065C00EE7F90 /* ViewModels */,
 				8C7564B22A4C1FE400EE7F90 /* Views */,
 				8C7564A82A4C15B400EE7F90 /* Controllers */,
@@ -161,6 +164,14 @@
 				8C7564D52A4E068300EE7F90 /* RegisterViewViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		8C7564D72A4EB41300EE7F90 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				8C7564D82A4EB43600EE7F90 /* AuthManager.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C7564AD2A4C160500EE7F90 /* SearchViewController.swift in Sources */,
+				8C7564D92A4EB43600EE7F90 /* AuthManager.swift in Sources */,
 				8C7564992A4C13F200EE7F90 /* MainTabBarViewController.swift in Sources */,
 				8C7564952A4C13F200EE7F90 /* AppDelegate.swift in Sources */,
 				8C7564D32A4DF4D800EE7F90 /* RegisterViewController.swift in Sources */,

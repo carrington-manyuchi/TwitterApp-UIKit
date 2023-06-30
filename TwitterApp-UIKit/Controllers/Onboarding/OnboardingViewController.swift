@@ -21,7 +21,7 @@ class OnboardingViewController: UIViewController {
     }()
     
     private let createAccountButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Create Account", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
