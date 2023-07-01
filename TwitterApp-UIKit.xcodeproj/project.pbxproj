@@ -39,6 +39,8 @@
 		8C7564E22A4F3A0C00EE7F90 /* TwitterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564E12A4F3A0C00EE7F90 /* TwitterUser.swift */; };
 		8C7564E42A4F3EE900EE7F90 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564E32A4F3EE900EE7F90 /* DatabaseManager.swift */; };
 		8C7564E62A4F44C000EE7F90 /* HomeViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564E52A4F44C000EE7F90 /* HomeViewViewModel.swift */; };
+		8C7564E82A4F503000EE7F90 /* ProfileDataFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564E72A4F503000EE7F90 /* ProfileDataFormViewController.swift */; };
+		8C7564EA2A4F516300EE7F90 /* ProfileDataFormViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7564E92A4F516300EE7F90 /* ProfileDataFormViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		8C7564E12A4F3A0C00EE7F90 /* TwitterUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterUser.swift; sourceTree = "<group>"; };
 		8C7564E32A4F3EE900EE7F90 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		8C7564E52A4F44C000EE7F90 /* HomeViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewViewModel.swift; sourceTree = "<group>"; };
+		8C7564E72A4F503000EE7F90 /* ProfileDataFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataFormViewController.swift; sourceTree = "<group>"; };
+		8C7564E92A4F516300EE7F90 /* ProfileDataFormViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataFormViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				8C7564B62A4C52D500EE7F90 /* ProfileViewController.swift */,
+				8C7564E72A4F503000EE7F90 /* ProfileDataFormViewController.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 				8C7564DC2A4F073200EE7F90 /* LoginViewViewModel.swift */,
 				8C7564DE2A4F07C000EE7F90 /* AuthenticationViewViewModel.swift */,
 				8C7564E52A4F44C000EE7F90 /* HomeViewViewModel.swift */,
+				8C7564E92A4F516300EE7F90 /* ProfileDataFormViewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -294,11 +300,13 @@
 				8C7564D32A4DF4D800EE7F90 /* RegisterViewController.swift in Sources */,
 				8C7564AF2A4C161200EE7F90 /* NotificationsViewController.swift in Sources */,
 				8C7564E22A4F3A0C00EE7F90 /* TwitterUser.swift in Sources */,
+				8C7564E82A4F503000EE7F90 /* ProfileDataFormViewController.swift in Sources */,
 				8C7564972A4C13F200EE7F90 /* SceneDelegate.swift in Sources */,
 				8C7564E62A4F44C000EE7F90 /* HomeViewViewModel.swift in Sources */,
 				8C7564AB2A4C15F900EE7F90 /* HomeViewController.swift in Sources */,
 				8C7564DF2A4F07C000EE7F90 /* AuthenticationViewViewModel.swift in Sources */,
 				8C7564B72A4C52D500EE7F90 /* ProfileViewController.swift in Sources */,
+				8C7564EA2A4F516300EE7F90 /* ProfileDataFormViewViewModel.swift in Sources */,
 				8C7564B12A4C162000EE7F90 /* DirectMessagesViewController.swift in Sources */,
 				8C7564E42A4F3EE900EE7F90 /* DatabaseManager.swift in Sources */,
 				8C7564B92A4C651C00EE7F90 /* ProfileTableViewHeader.swift in Sources */,
