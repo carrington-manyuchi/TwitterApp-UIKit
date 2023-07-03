@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import PhotosUI
+import Combine
 
 class ProfileDataFormViewController: UIViewController {
+
+    private var viewModel = ProfileDataFormViewViewModel()
+    private var subscriptions: Set<AnyCancellable> = []
     
     private let scrollView: UIScrollView = {
        let scrollView = UIScrollView()
@@ -62,25 +67,99 @@ class ProfileDataFormViewController: UIViewController {
         imageView.image = UIImage(systemName: "camera.fill")
         imageView.tintColor = .gray
         imageView.isUserInteractionEnabled = true
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
-    
+    private let bioTextView: UITextView = {
+        let  textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.backgroundColor = .secondarySystemFill
+        textView.layer.masksToBounds = true
+        textView.layer.cornerRadius = 8
+        textView.textContainerInset = .init(top: 15, left: 15, bottom: 15, right: 15)
+        textView.text = "Tell the world about yourself"
+        textView.textColor = .gray
+        textView.font = .systemFont(ofSize: 17)
+        return textView
+    }()
+
+    private let submitButton: UIButton = {
+       let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Submit", for: .normal)
+        button.tintColor = .white
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        button.backgroundColor = .twitterBlueColor
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 25
+        button.isEnabled = false
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        isModalInPresentation = true
         view.backgroundColor = .systemBackground
         view.addSubview(scrollView)
         scrollView.addSubview(hintLabel)
         scrollView.addSubview(avatarPlaceholderImageView)
         scrollView.addSubview(usernameTextField)
         scrollView.addSubview(displayNameTextField)
-        
-        //
-        //isModalInPresentation = true
-       
+        scrollView.addSubview(bioTextView)
+        scrollView.addSubview(submitButton)
+        bioTextView.delegate = self
+        usernameTextField.delegate = self
+        displayNameTextField.delegate = self
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
         configureConstraints()
+        submitButton.addTarget(self, action: #selector(didTapSubmit), for: .touchUpInside)
+        avatarPlaceholderImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToUpload)))
+        bindViews()
+    }
+    
+    
+    @objc private func didTapSubmit() {
+        viewModel.uploadAvatar()
+    }
+    
+     @objc private func didUpdateDisplayName() {
+         viewModel.displayName = displayNameTextField.text
+         viewModel.validateUserProfileForm()
+    }
+    
+    @objc private func didUpdateUsername() {
+        viewModel.username = usernameTextField.text
+        viewModel.validateUserProfileForm()
+    }
+    
+    private func bindViews() {
+        displayNameTextField.addTarget(self, action: #selector(didUpdateDisplayName), for: .editingChanged)
+        usernameTextField.addTarget(self, action: #selector(didUpdateUsername), for: .editingChanged)
+        viewModel.$isFormValid.sink { [weak self] buttonState in
+            self?.submitButton.isEnabled = buttonState
+        }.store(in: &subscriptions)
+        
+        viewModel.$isOnboardingFinished.sink { [weak self] success in
+            if success {
+                self?.dismiss(animated: true)
+            }
+        }
+        .store(in: &subscriptions)
+
+    }
+    
+    @objc private func didTapToUpload() {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+    
+    @objc private func didTapToDismiss() {
+        view.endEditing(true)
     }
     
     private func configureConstraints() {
@@ -118,12 +197,87 @@ class ProfileDataFormViewController: UIViewController {
             usernameTextField.heightAnchor.constraint(equalToConstant: 50)
         ]
         
+        
+        let bioTextViewConstraints = [
+            bioTextView.leadingAnchor.constraint(equalTo: displayNameTextField.leadingAnchor),
+            bioTextView.trailingAnchor.constraint(equalTo: displayNameTextField.trailingAnchor),
+            bioTextView.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 30),
+            bioTextView.heightAnchor.constraint(equalToConstant: 150)
+        ]
+        
+        let submitButtonConstraints = [
+            submitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            submitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            submitButton.heightAnchor.constraint(equalToConstant: 50),
+            submitButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -20)
+        ]
+        
         NSLayoutConstraint.activate(scrollViewConstraints)
         NSLayoutConstraint.activate(hintLabelConstraints)
         NSLayoutConstraint.activate(avatarPlaceholderImageViewConstraints)
         NSLayoutConstraint.activate(displayNameTextFieldConstraints)
         NSLayoutConstraint.activate(usernameTextFieldConstraints)
+        NSLayoutConstraint.activate(submitButtonConstraints)
+        NSLayoutConstraint.activate(bioTextViewConstraints)
     }
 
 
+}
+
+extension ProfileDataFormViewController: UITextViewDelegate, UITextFieldDelegate {
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: textView.frame.origin.y - 100), animated: true)
+        if textView.textColor == .gray {
+            textView.textColor = .label
+            textView.text = ""
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        if textView.text.isEmpty {
+            textView.text = "Tell the world about yourself"
+            textView.textColor = .gray
+        }
+    }
+    
+    
+    func textViewDidChange(_ textView: UITextView) {
+        viewModel.bio = textView.text
+        viewModel.validateUserProfileForm()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: textField.frame.origin.y - 100), animated: true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
+    
+}
+
+
+
+
+extension ProfileDataFormViewController: PHPickerViewControllerDelegate {
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        for result in results {
+            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
+                if let image = object as? UIImage {
+                    DispatchQueue.main.async {
+                        self?.avatarPlaceholderImageView.image = image
+                        self?.viewModel.imageData = image
+                        self?.viewModel.validateUserProfileForm()
+                    }
+                }
+            }
+        }
+    }
+    
+    
 }
